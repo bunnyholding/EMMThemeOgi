@@ -1,0 +1,27 @@
+{% if titles is not empty %}
+    <div class="card-columns">
+        {% for title in titles %}
+            <div class="card">
+                {% set sources = [] %}
+                {% if title.imageSrc is defined %}
+                    {% set sources = sources|merge([title.imageSrc]) %}
+                {% endif %}
+                {% if title.episodeParent is defined and title.episodeParent.imageSrc is defined %}
+                    {% set sources = sources|merge([title.episodeParent.imageSrc]) %}
+                {% endif %}
+                {% set imageSource = displayImage(sources, 'app_title') %}
+                {% if imageSource is not empty %}
+                    <a href="{{ path('app_title', {id: title.id, slug: title.slug}) }}">
+                        <img class="card-img-top" src="{{ imageSource }}" alt="{{ title.name }}">
+                    </a>
+                {% endif %}
+                <div class="card-body" style="padding: 0.75rem;">
+                    <h6 class="card-title"><a href="{{ path('app_title', {id: title.id, slug: title.slug}) }}">{{ extendedTitleName(title) }}</a></h6>
+                    <p class="card-text">
+                        <a href="{{ ads('download', extendedTitleName(title)) }}" class="card-link btn btn-block btn-sm btn-outline-primary px-3"><i class="fas fa-file-pdf"></i> {{ 'title.download'|themeTrans }}</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,27 @@
+{% if metascore %}
+    {% if metascore < 40 %}
+        {% set metaclass = "negative" %}
+    {% elseif metascore < 61 %}
+        {% set metaclass = "mixed" %}
+    {% else %}
+        {% set metaclass = "positive" %}
+    {% endif %}
+    <div id="metascore">
+        {#todo category on link - movie/tv #}
+        {% if item.category is defined %}
+            {% if item.category == 'Movie' %}
+                {% set metacriticCategory = 'movie' %}
+            {% elseif item.category in ['TV Series', 'TV Mini-Series'] %}
+                {% set metacriticCategory = 'tv' %}
+            {% endif %}x
+        {% endif %}
+        {% if metacriticCategory is defined %}
+            <a href="{{ displayUrl('https://www.metacritic.com/search/'~ metacriticCategory ~'/' ~ item.name|url_encode ~ '/results') }}" target="_blank">
+                <div class="metascore {{ metaclass }} text-center rounded-lg">{{ metascore }}</div>
+            </a>
+        {% else %}
+            <div class="metascore {{ metaclass }} text-center rounded-lg">{{ metascore }}</div>
+        {% endif %}
+
+    </div>
+{% endif %}

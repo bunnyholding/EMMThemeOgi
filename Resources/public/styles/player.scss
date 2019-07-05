@@ -1,0 +1,128 @@
+#video{
+    .title-wrapper {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 15px;
+        display: block;
+        color: #fff;
+        position: absolute;
+        margin: 0;
+        width: 100%;
+        z-index: 110;
+        h3{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+    .controls-wrapper {
+        font-size: 20px;
+        width: 100%;
+        background-color: #4C4C4C;
+        color: #999;
+        height: 44px;
+        line-height: 0;
+        overflow: hidden;
+        padding: 12px;
+        position: absolute;
+        bottom: 0;
+        z-index: 110;
+        .control{
+            display: inline-block;
+            &:hover {
+                color: #fff;
+                cursor: pointer;
+            }
+            .hd {
+                background: #c00 none repeat scroll 0 0;
+                border-radius: 3px;
+                color: #fff;
+                font-size: 9px;
+                font-weight: bold;
+                bottom: 12px;left: 12px;
+                line-height: 100%;
+                padding: 3px;
+            }
+        }
+        .left-controls{
+            float: left;
+            .control{
+                margin-right: 15px;
+            }
+        }
+
+        .right-controls{
+            float: right;
+            .control{
+                margin-left: 15px;
+            }
+        }
+    }
+    .video-wrapper {/* video */
+        height: 100%;
+        .image{/* background image width and opacity */
+            opacity: 0.9;
+            height: 100%;
+            position: relative;
+            z-index: 109;
+            background-color: #2a2a2a;
+            img{
+                /* spread image to 100% */
+                width:100%;
+            }
+        }
+        #play {
+            color: #fff;
+            font-size: 2.5em;
+            height: 1em;
+            width: 1em;
+            z-index: 110;
+            cursor: pointer;
+            line-height: 0;
+            position: absolute;
+            margin: auto;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            @media (min-width: 768px) {
+                font-size: 5em;
+            }
+        }
+        .loading {
+            display: none;
+            background: #000 none repeat scroll 0 0;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            z-index: 111;
+        }
+        .loader {
+            background-color: transparent;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("data:image/svg+xml,%3Csvg class='lds-spinner' width='200' height='200' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid' style='background:0%25 0%25'%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.9166666666666666s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(30 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.8333333333333334s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(60 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.75s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(90 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.6666666666666666s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(120 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.5833333333333334s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(150 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.5s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(180 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.4166666666666667s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(210 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.3333333333333333s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(240 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.25s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(270 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.16666666666666666s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(300 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='-0.08333333333333333s' repeatCount='indefinite'/%3E%3C/rect%3E%3Crect x='47' y='24' rx='9.4' ry='4.8' width='6' height='12' fill='%23fdfdfd' transform='rotate(330 50 50)'%3E%3Canimate attributeName='opacity' values='1;0' keyTimes='0;1' dur='1s' begin='0s' repeatCount='indefinite'/%3E%3C/rect%3E%3C/svg%3E");
+            display: none;
+            height: 100%;
+            width: 100%;
+        }
+        .loaded {
+            display: none;
+            color: #fff;
+            font-weight: bold;
+            width: 100%;
+            line-height: 1;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+            .warning{
+                color: orange;
+                font-size: 2.5rem;
+            }
+        }
+    }
+    &:hover #play span {
+        color: #f00;
+        text-shadow: 0 0 8px #000;
+    }
+}

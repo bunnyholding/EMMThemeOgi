@@ -1,0 +1,9 @@
+{% if rating.weight and rating.value %}
+    <div class="star-rating">
+        {% set value = rating.value * stars / rating.scale %}
+        {% for i in 1..stars %}
+            <span class="fa fa-star {{ i <= value|round ? 'checked' : '' }}"></span>
+        {% endfor %}
+        ({{ value|round(2) }}) {{ rating.weight|localizednumber }} {{ '_votes'|themeTrans({'%count%': rating.weight}) }}
+    </div>
+{% endif %}

@@ -1,0 +1,35 @@
+<div id="video" class="embed-responsive embed-responsive-16by9">
+    <div class="embed-responsive-item">
+        <div class="title-wrapper"><h3 class="mb-0 font-weight-bold">{{ extendedTitleName(item) }}</h3></div>
+        <div class="video-wrapper">
+            <div class="loading">
+                <div class="loader"></div>
+                <div class="loaded">
+                    <p class="warning font-weight-bold"><span class="fas fa-exclamation-triangle"></span></p>
+                    <p class="lead font-weight-bold">{{ 'player.paragraph0'|themeTrans({'%name%': extendedTitleName(item)}) }}</p>
+                    <a class="btn btn-success btn-lg" target="_blank" href="{{ ads('stream', extendedTitleName(item)) }}">{{ 'player.paragraph1'|themeTrans }}</a>
+                </div>
+            </div>
+            <div class="image">
+                {% if item.trailer is defined and item.trailer is not empty %}
+                    {% set order = random(item.trailer|length - 1)  %}
+                    <img alt="{{ extendedTitleName(item) }}" src="{{ item.trailer[order].imageSrc }}">
+                {% endif %}
+            </div>
+            <div id="play"><span class="fas fa-play"></span></div>
+        </div>
+        <div class="controls-wrapper">
+            <div class="left-controls">
+                <div class="control"><span class="fas fa-play"></span></div>
+                <div class="control"><span class="fas fa-volume-up"></span></div>
+                {% if item.duration is defined and item.duration %}
+                    <div class="control">{{ item.duration|convertDurationToTimeFormat }}</div>
+                {% endif %}
+            </div>
+            <div class="right-controls">
+                <div class="control position-relative"><span class="fas fa-cog"></span><span class="hd position-absolute">HD</span></div>
+                <div class="control"><span class="fas fa-expand"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<header class="mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('app_index') }}">
+                <i class="fas fa-play-circle"></i><span>&nbsp;</span>
+                <span class="text-monospace">{{ app_website_name }}</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="{{ 'nav.toggle'|themeTrans({},'navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link {{ activeNav(['app_index'], app_theme_options.navigation_active_class) }}" href="{{ path('app_index') }}">{{ 'nav.home'|themeTrans({},'navigation') }}</a>
+                    <a class="nav-item nav-link {{ activeNav(['app_contact'], app_theme_options.navigation_active_class) }}" href="{{ path('app_contact') }}">{{ 'nav.contact'|themeTrans({},'navigation') }}</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

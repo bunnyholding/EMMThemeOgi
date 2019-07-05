@@ -1,0 +1,16 @@
+{# https://proto.io/freebies/onoff/, requires jQuery #}
+<style>
+    .onoffswitch-inner:before {
+        content: "{{ 'flipswitch.on'|themeTrans }}";
+    }
+    .onoffswitch-inner:after {
+        content: "{{ 'flipswitch.off'|themeTrans }}";
+    }
+</style>
+<div class="onoffswitch">
+    <input autocomplete="off" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+</div>

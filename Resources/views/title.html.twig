@@ -1,0 +1,308 @@
+{% extends '@theme/layout.html.twig' %}
+
+{% block title %}{{ title(item, 'app_title') }}{% endblock %}
+{% block description %}{{ description(item, 'app_title') }}{% endblock %}
+{% block head %}
+    {% set sources = [] %}
+    {% if item.imageSrc is defined %}
+        {% set sources = sources|merge([item.imageSrc]) %}
+    {% endif %}
+    {% if item.episodeParent is defined and item.episodeParent.imageSrc is defined %}
+        {% set sources = sources|merge([item.episodeParent.imageSrc]) %}
+    {% endif %}
+    {% set imageSource = displayImage(sources, 'app_title') %}
+
+
+    <link rel="canonical" href="{{ url('app_title', {id: item.id, slug: item.slug}) }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ path('app_title', {id: item.id, slug: item.slug}) }}">
+    <meta property="og:title" content="{{ extendedTitleName(item) }}">
+    <meta property="og:description" content="{% if item.description is defined and item.description is not null %}{{ item.description|excerpt }}{% endif %}">
+    {% if imageSource is not empty %}
+        <meta property="og:image" content="{{ imageSource }}">
+    {% endif %}
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ path('app_title', {id: item.id, slug: item.slug}) }}">
+    <meta property="twitter:title" content="{{ extendedTitleName(item) }}">
+    <meta property="twitter:description" content="{% if item.description is defined and item.description is not null %}{{ item.description|excerpt }}{% endif %}">
+    {% if imageSource is not empty %}
+        <meta property="twitter:image" content="{{ imageSource }}">
+    {% endif %}
+
+    {{ displaySchemaOrgStructuredData(item, 'app_title') }}
+{% endblock %}
+
+{% block javascripts %}
+    {# description collapse js #}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let el = $('.collapse-content');
+            el.each(function () {
+                let divHeight = $(this).prop('scrollHeight');
+                let lineHeight = parseInt($(this).css('line-height'));
+                let lines = divHeight / lineHeight;
+                if (lines > {{ app_theme_options.collapse_me_number_of_lines }}) {
+                    //display show more/less button otherwise let it hidden
+                    $(this).siblings('.collapsed').removeClass('d-none');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .collapse-me{
+            line-height: {{ app_theme_options.collapse_me_line_height }};
+        }
+        .collapse-me p.collapse:not(.show) {
+            height: {{ app_theme_options.collapse_me_number_of_lines*app_theme_options.collapse_me_line_height }}rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: {{ app_theme_options.collapse_me_number_of_lines }};
+            -webkit-box-orient: vertical;
+        }
+        .collapse-me p.collapsing {
+            min-height: {{ app_theme_options.collapse_me_number_of_lines*app_theme_options.collapse_me_line_height }}rem !important;
+        }
+        .collapse-me a.collapsed:after  {
+            content: '+ {{ 'more'|themeTrans }}';
+        }
+        .collapse-me a:not(.collapsed):after {
+            content: '- {{ 'less'|themeTrans }}';
+        }
+    </style>
+{% endblock %}
+
+{% block full_body %}
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            {% set sources = [] %}
+            {% if item.imageSrc is defined %}
+                {% set sources = sources|merge([item.imageSrc]) %}
+            {% endif %}
+            {% if item.episodeParent is defined and item.episodeParent.imageSrc is defined %}
+                {% set sources = sources|merge([item.episodeParent.imageSrc]) %}
+            {% endif %}
+            {% set imageSource = displayImage(sources, 'app_title') %}
+            {% if imageSource is not empty %}
+                <div class="col-md-3 col-sm-4">
+                    <img class="card-img" src="{{ imageSource }}"  alt="{{ item.name }}">
+                </div>
+            {% endif %}
+            <div class="col-md-9 col-sm-8">
+                <div class="card-body">
+                    <h1 class="d-inline-block">
+                        {% set h1 = extendedTitleName(item) %}
+                        <strong>{{ h1 }}</strong>
+                        {% if h1 != item.name %}
+                            <br><small>{{ item.name }}</small>
+                        {% endif %}
+                    </h1>
+
+                    {% include '@theme/_metascore.html.twig' with {metascore: item.metascore} %}
+                    {% include '@theme/_star_rating.html.twig' with {rating: item.rating, stars: 5} %}
+                    <hr>
+                    {% if item.description is defined and item.description is not empty %}
+                        <blockquote>{{ item.description }}</blockquote>
+                    {% endif %}
+                    <p class="mb-0">
+                        {% if item.episodeParent is defined and item.episodeParent is not null %}
+                            <strong>{{ 'title.TVSeries'|themeTrans }}:</strong>&nbsp;<a href="{{ path('app_title', {id: item.episodeParent.id, slug: item.episodeParent.slug}) }}">{{ item.episodeParent.name }}</a>
+                            <br>
+                        {% endif %}
+                        {% if item.season is defined and item.season is not null %}
+                            <strong>{{ 'title.season'|themeTrans }}:</strong> {{ item.season }}<br>
+                        {% endif %}
+                        {% if item.episode is defined and item.episode is not null %}
+                            <strong>{{ 'title.episode'|themeTrans }}:</strong> {{ item.episode }}<br>
+                        {% endif %}
+                        {% if item.contentRating is defined and item.contentRating is not null %}
+                            <strong>{{ 'title.contentRating'|themeTrans }}:</strong> {{ item.contentRating }}<br>
+                        {% endif %}
+                        {% if item.duration is defined and item.duration is not null %}
+                            <strong>{{ 'title.duration'|themeTrans }}:</strong> {{ '_minutes'|themeTrans({'%count%': item.duration}) }}<br>
+                        {% endif %}
+                        {% if item.genres is defined and item.genres is not empty %}
+                            <strong>{{ 'title.genres'|themeTrans({'%count%': item.genres|length}) }}:</strong>
+                            {% for genre in item.genres %}
+                                {{ genre.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        {% if item.companies is defined and item.companies is not empty %}
+                            <strong>{{ 'title.production'|themeTrans }}:</strong>
+                            {% for company in item.companies %}
+                                {{ company.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        {% if item.externalSites is defined and item.externalSites is not empty %}
+                            <strong>{{ 'title.externalSites'|themeTrans({'%count%': item.externalSites|length}) }}:</strong>&nbsp;
+                            {% for externalSite in item.externalSites %}
+                                <a target="_blank" href="{{ displayUrl(externalSite.cloakedUrl) }}"><i class="fas fa-external-link-alt"></i> {{ externalSite.name }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        {% if item.locations is defined and item.locations is not empty %}
+                            <strong>{{ 'title.places'|themeTrans({'%count%': item.locations|length}) }}:</strong>
+                            {% for location in item.locations %}
+                                {{ location }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        {% if item.releasedYear is defined and item.releasedYear is not null %}
+                            <strong>{{ 'title.released'|themeTrans }}:</strong> {{ item.releasedYear }}<br>
+                        {% endif %}
+                        {% if item.countries is defined and item.countries is not empty %}
+                            <strong>{{ 'title.countries'|themeTrans({'%count%': item.countries|length}) }}:</strong>
+                            {% for country in item.countries %}
+                                {{ country.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        {% if item.languages is defined and item.languages is not empty %}
+                            <strong>{{ 'title.languages'|themeTrans({'%count%': item.languages|length}) }}:</strong>
+                            {% for language in item.locations %}
+                                {{ language.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <a href="{{ ads('download', extendedTitleName(item)) }}" class="card-link btn btn-block btn-lg btn-primary px-5">
+                        <i class="fas fa-download"></i>&nbsp;<strong>{{ 'title.download'|themeTrans }}</strong>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ ads('stream', extendedTitleName(item)) }}" class="card-link btn btn-block btn-lg btn-dark px-5">
+                        <i class="fas fa-play-circle"></i>&nbsp;<strong>{{ 'title.stream'|themeTrans }}</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% if item.category != 'TV Series' and item.category != 'TV Mini-Series' %}
+                <li class="list-group-item" style="padding: 0;">
+                    {% include '@theme/_player.html.twig' %}
+                </li>
+                <li class="list-group-item">
+                    {% include '@theme/_flipswitch.html.twig' %}
+                </li>
+            {% endif %}
+            {% if (item.previousEpisode is defined and item.previousEpisode is not null) or (item.nextEpisode is defined and item.nextEpisode is not null) %}
+                <li class="list-group-item">
+                    <div class="row">
+                        {% if item.previousEpisode is defined and item.previousEpisode is not null %}
+                            <div class="col-sm-6">
+                                <div class="media">
+                                    {% set imageSource = displayImage(item.previousEpisode.imageSrc, 'app_title') %}
+                                    {% if imageSource is not empty %}
+                                        <img style="max-width: 75px;" class="card-img mr-3" src="{{ imageSource }}"  alt="{{ extendedTitleName(item.previousEpisode) }}">
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <h4 class="mb-0"><a href="{{ path('app_title', {id: item.previousEpisode.id, slug: item.previousEpisode.slug}) }}">{{ extendedTitleName(item.previousEpisode) }}</a></h4>
+                                        <p>{{ item.previousEpisode.name }}</p>
+                                        <p><a class="btn btn-sm btn-outline-secondary" href="{{ path('app_title', {id: item.previousEpisode.id, slug: item.previousEpisode.slug}) }}">Previous</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if item.nextEpisode is defined and item.nextEpisode is not null %}
+                            <div class="col-sm-6">
+                                <div class="media text-right">
+                                    <div class="media-body">
+                                        <h4 class="mb-0"><a href="{{ path('app_title', {id: item.nextEpisode.id, slug: item.nextEpisode.slug}) }}">{{ extendedTitleName(item.nextEpisode) }}</a></h4>
+                                        <p>{{ item.nextEpisode.name }}</p>
+                                        <p><a class="btn btn-sm btn-outline-secondary" href="{{ path('app_title', {id: item.nextEpisode.id, slug: item.nextEpisode.slug}) }}">Next</a></p>
+                                    </div>
+                                    {% set imageSource = displayImage(item.nextEpisode.imageSrc, 'app_title') %}
+                                    {% if imageSource is not empty %}
+                                        <img style="max-width: 75px;" class="card-img ml-3" src="{{ imageSource }}"  alt="{{ extendedTitleName(item.nextEpisode) }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endif %}
+            {% if item.reviews is defined and item.reviews is not empty %}
+                {% for review in item.reviews %}
+                    <li class="list-group-item">
+                        <div class="media">
+                            <span class="mr-2">{{ hracikAvatar(review.content) }}</span>
+                            <div class="media-body">
+                                <h5 class="m-0">
+                                    <strong>{{ review.name }}</strong>
+                                    {% include '@theme/_number_rating.html.twig' with {rating: review.titleRating, max: 10} %}
+                                </h5>
+                                <div class="collapse-me">
+                                    <p class="collapse mb-0 collapse-content" id="collapse-review-content{{ loop.index }}">{{ review.content|raw }}</p>
+                                    <a class="collapsed d-none" data-toggle="collapse" href="#collapse-review-content{{ loop.index }}" aria-label="{{ 'collapse'|themeTrans }}" aria-expanded="false" aria-controls="collapse-review-content{{ loop.index }}"></a>
+                                </div>
+                                {% include '@theme/_star_rating.html.twig' with {rating: review.rating, stars: 5} %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        {% if item.awards is defined and item.awards is not empty %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fas fa-trophy"></i>
+                    {% for award in item.awards %}
+                        {{ award }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+    {% if item.listSeasonsWithEpisodes is defined and item.listSeasonsWithEpisodes is not empty %}
+        <div class="accordion mb-3" id="accordionSeasons">
+            {% for season, episodes in item.listSeasonsWithEpisodes %}
+                {% if season == '-1' %}{% set season = 'unknown'|themeTrans %}{% endif %}
+                <div class="card">
+                    <div class="card-header p-0" id="headingSeason{{ season }}">
+                        <h2 class="">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeason{{ season }}" aria-expanded="true" aria-controls="collapseSeason{{ season }}">
+                                {{ item.name }} - {{ 'title.season'|themeTrans }} {{ season }}
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseSeason{{ season }}" class="collapse {% if loop.last %}show{% endif %}" aria-labelledby="headingSeason{{ season }}" data-parent="#accordionSeasons">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped table-hover">
+                                    <tbody>
+                                    {% for episode in episodes %}
+                                        <tr>
+                                            <td>
+                                                <a href="{{ path('app_title', {id: episode.id, slug: episode.slug}) }}">
+                                                    {% set name = extendedTitleName(episode, item) %}
+                                                    <i class="fas fa-film"></i> {{ name }}
+                                                    {% if name != episode.name %}
+                                                        ({{ episode.name }})
+                                                    {% endif %}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% include '@theme/_titles.html.twig' with {titles: item.otherTitles } %}
+{% endblock %}

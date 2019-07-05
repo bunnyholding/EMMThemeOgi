@@ -1,0 +1,14 @@
+{% if rating.weight and rating.value %}
+    {% if max is not defined %}
+        {% set max = rating.scale %}
+    {% endif %}
+    {% set value = rating.value * max / rating.scale %}
+    {% if value < 0.4*max %}
+        {% set class = "negative" %}
+    {% elseif value < 0.61*max %}
+        {% set class = "mixed" %}
+    {% else %}
+        {% set class = "positive" %}
+    {% endif %}
+    <div class="number-rating rounded-lg {{ class }}">{{ value|round }}</div>
+{% endif %}

@@ -1,0 +1,30 @@
+{
+  "name": "bunnyholding/emm-theme-ogi-bundle",
+  "type": "emm-theme",
+  "description": "EMMTheme Ogi",
+  "license": "MIT",
+  "require": {
+    "php": "^7.1.3",
+    "oomphinc/composer-installers-extender": "^1.1",
+    "twig/extensions": "^1.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  },
+  "extra": {
+    "installer-name": "Ogi"
+  },
+  "autoload": {
+    "psr-4": {
+      "EMMWeb\\EMMTheme\\Ogi\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "EMMWeb\\EMMTheme\\Ogi\\Tests\\": "/Tests/"
+    }
+  }
+}

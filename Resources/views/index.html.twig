@@ -1,0 +1,15 @@
+{% extends '@theme/layout.html.twig' %}
+
+{% block title %}{{ 'index.title'|themeTrans }}{% endblock %}
+
+{% block full_body %}
+    <div id="latestEp">
+        {% include '@theme/_titles.html.twig' with {titles: extra.latestEpisodes} %}
+    </div>
+    <div id="latest">
+        {% include '@theme/_titles.html.twig' with {titles: extra.latestTitles} %}
+    </div>
+    <div id="popular">
+        {% include '@theme/_titles.html.twig' with {titles: extra.popularTitles} %}
+    </div>
+{% endblock %}
