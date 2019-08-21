@@ -11,7 +11,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link {{ activeNav(['app_index'], app_theme_options.navigation_active_class) }}" href="{{ path('app_index') }}">{{ 'nav.home'|themeTrans({},'navigation') }}</a>
-                    <a class="nav-item nav-link {{ activeNav(['app_contact'], app_theme_options.navigation_active_class) }}" href="{{ path('app_contact') }}">{{ 'nav.contact'|themeTrans({},'navigation') }}</a>
+                    {% if routeExists('app_contact') %}
+                        <a class="nav-item nav-link {{ activeNav(['app_contact'], app_theme_options.navigation_active_class) }}" href="{{ path('app_contact') }}">{{ 'nav.contact'|themeTrans({},'navigation') }}</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

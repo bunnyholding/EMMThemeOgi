@@ -3,10 +3,18 @@
         <div class="container">
             <span class="navbar-text">{{ app_name }}  ©{{ 'now'|date('Y') }}</span>
             <div class="navbar-nav">
-                <a class="nav-item nav-link {{ activeNav(['app_terms'], app_theme_options.navigation_active_class) }}" href="{{ path('app_terms') }}">{{ 'nav.terms'|themeTrans({},'navigation') }}</a>
-                <a class="nav-item nav-link {{ activeNav(['app_privacy'], app_theme_options.navigation_active_class) }}" href="{{ path('app_privacy') }}">{{ 'nav.privacy'|themeTrans({},'navigation') }}</a>
-                <a class="nav-item nav-link {{ activeNav(['app_disclaimer'], app_theme_options.navigation_active_class) }}" href="{{ path('app_disclaimer') }}">{{ 'nav.disclaimer'|themeTrans({},'navigation') }}</a>
-                <a class="nav-item nav-link {{ activeNav(['app_dmca'], app_theme_options.navigation_active_class) }}" href="{{ path('app_dmca') }}">{{ 'nav.dmca'|themeTrans({},'navigation') }}</a>
+                {% if routeExists('app_terms') %}
+                    <a class="nav-item nav-link {{ activeNav(['app_terms'], app_theme_options.navigation_active_class) }}" href="{{ path('app_terms') }}">{{ 'nav.terms'|themeTrans({},'navigation') }}</a>
+                {% endif %}
+                {% if routeExists('app_privacy') %}
+                    <a class="nav-item nav-link {{ activeNav(['app_privacy'], app_theme_options.navigation_active_class) }}" href="{{ path('app_privacy') }}">{{ 'nav.privacy'|themeTrans({},'navigation') }}</a>
+                {% endif %}
+                {% if routeExists('app_disclaimer') %}
+                    <a class="nav-item nav-link {{ activeNav(['app_disclaimer'], app_theme_options.navigation_active_class) }}" href="{{ path('app_disclaimer') }}">{{ 'nav.disclaimer'|themeTrans({},'navigation') }}</a>
+                {% endif %}
+                {% if routeExists('app_dmca') %}
+                    <a class="nav-item nav-link {{ activeNav(['app_dmca'], app_theme_options.navigation_active_class) }}" href="{{ path('app_dmca') }}">{{ 'nav.dmca'|themeTrans({},'navigation') }}</a>
+                {% endif %}
             </div>
         </div>
     </nav>
