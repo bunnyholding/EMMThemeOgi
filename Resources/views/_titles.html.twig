@@ -9,7 +9,7 @@
                 {% if title.episodeParent is defined and title.episodeParent.imageSrc is defined %}
                     {% set sources = sources|merge([title.episodeParent.imageSrc]) %}
                 {% endif %}
-                {% set imageSource = displayImage(sources, 'app_title') %}
+                {% set imageSource = displayImage(sources, app_item_settings.app_title) %}
                 {% if imageSource is not empty %}
                     <a href="{{ path('app_title', {id: title.id, slug: title.slug}) }}">
                         <img class="card-img-top" src="{{ imageSource }}" alt="{{ title.name }}">
