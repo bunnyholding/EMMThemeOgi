@@ -178,12 +178,12 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <a href="{{ ads('download', extendedTitleName(item)) }}" class="card-link btn btn-block btn-lg btn-primary px-5">
+                    <a href="{{ ads(item, 'download') }}" class="card-link btn btn-block btn-lg btn-primary px-5">
                         <i class="fas fa-download"></i>&nbsp;<strong>{{ 'title.download'|themeTrans }}</strong>
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ ads('stream', extendedTitleName(item)) }}" class="card-link btn btn-block btn-lg btn-dark px-5">
+                    <a href="{{ ads(item, 'stream') }}" class="card-link btn btn-block btn-lg btn-dark px-5">
                         <i class="fas fa-play-circle"></i>&nbsp;<strong>{{ 'title.stream'|themeTrans }}</strong>
                     </a>
                 </div>

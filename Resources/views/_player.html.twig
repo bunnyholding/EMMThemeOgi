@@ -7,7 +7,7 @@
                 <div class="loaded">
                     <p class="warning font-weight-bold"><span class="fas fa-exclamation-triangle"></span></p>
                     <p class="lead font-weight-bold">{{ 'player.paragraph0'|themeTrans({'%name%': extendedTitleName(item)}) }}</p>
-                    <a class="btn btn-success btn-lg" target="_blank" href="{{ ads('stream', extendedTitleName(item)) }}">{{ 'player.paragraph1'|themeTrans }}</a>
+                    <a class="btn btn-success btn-lg" target="_blank" href="{{ ads(item, 'stream') }}">{{ 'player.paragraph1'|themeTrans }}</a>
                 </div>
             </div>
             <div class="image">
