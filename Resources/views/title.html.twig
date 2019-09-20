@@ -193,13 +193,15 @@
             </div>
         </div>
         <ul class="list-group list-group-flush">
-            {% if item.category != 'TV Series' and item.category != 'TV Mini-Series' %}
-                <li class="list-group-item" style="padding: 0;">
-                    {% include '@theme/_player.html.twig' %}
-                </li>
-                <li class="list-group-item">
-                    {% include '@theme/_flipswitch.html.twig' %}
-                </li>
+            {% if item.category is defined %}
+                {% if item.category != 'TV Series' and item.category != 'TV Mini-Series' %}
+                    <li class="list-group-item" style="padding: 0;">
+                        {% include '@theme/_player.html.twig' %}
+                    </li>
+                    <li class="list-group-item">
+                        {% include '@theme/_flipswitch.html.twig' %}
+                    </li>
+                {% endif %}
             {% endif %}
             {% if (item.previousEpisode is defined and item.previousEpisode is not null) or (item.nextEpisode is defined and item.nextEpisode is not null) %}
                 <li class="list-group-item">
