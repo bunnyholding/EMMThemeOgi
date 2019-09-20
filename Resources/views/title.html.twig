@@ -146,7 +146,7 @@
                         {% if item.externalSites is defined and item.externalSites is not empty %}
                             <strong>{{ 'title.externalSites'|themeTrans({'%count%': item.externalSites|length}) }}:</strong>&nbsp;
                             {% for externalSite in item.externalSites %}
-                            <a target="_blank" href="{{ displayUrl(externalSite.cloakedUrl) }}"><i class="fas fa-external-link-alt"></i> {{ externalSite.name }}</a>{% if not loop.last %}, {% endif %}
+                            <a target="_blank" href="{{ derefererUrl(externalSite.cloakedUrl) }}"><i class="fas fa-external-link-alt"></i> {{ externalSite.name }}</a>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                             <br>
                         {% endif %}

@@ -22,7 +22,7 @@ Displays title name in more SEO friendly format. Returns string.
 ## Examples
 See examples how it could look like when you use functions and filters in Twig template together with variables.
 ```
-&#127902; Watch/download {{ extendedTitleName(item) }} {{ renderIfEverythingSet('&#11088;%%s/%%s', [item.rating.value, item.rating.scale])|delimiter }} {{ arraySlice('3', item.genres, 'name')|comma|delimiter }} {{ trimOnWord('24', item.description) }}
+&#127902; Watch/download {{ extendedTitleName(item) }} {{ renderIfEverythingIsNotEmpty('&#11088;%%s/%%s', [item.rating.value, item.rating.scale])|delimiter }} {{ arraySlice('3', item.genres, 'name')|comma|delimiter }} {{ trimOnWord('24', item.description) }}
 HD Stream &#128250; {{ extendedTitleName(item)|delimiter }} {{ item.releasedYear }}
 https://google.com?q={{ ('Download ' ~ extendedTitleName(item))|url_encode }}
 ```
