@@ -102,9 +102,12 @@
                             <br><small>{{ item.name }}</small>
                         {% endif %}
                     </h1>
-
-                    {% include '@theme/_metascore.html.twig' with {metascore: item.metascore} %}
-                    {% include '@theme/_star_rating.html.twig' with {rating: item.rating, stars: 5} %}
+                    {% if item.metascore is defined %}
+                        {% include '@theme/_metascore.html.twig' with {metascore: item.metascore} %}
+                    {% endif %}
+                    {% if item.rating is defined %}
+                        {% include '@theme/_star_rating.html.twig' with {rating: item.rating, stars: 5} %}
+                    {% endif %}
                     <hr>
                     {% if item.description is defined and item.description is not empty %}
                         <blockquote>{{ item.description }}</blockquote>
@@ -143,7 +146,7 @@
                         {% if item.externalSites is defined and item.externalSites is not empty %}
                             <strong>{{ 'title.externalSites'|themeTrans({'%count%': item.externalSites|length}) }}:</strong>&nbsp;
                             {% for externalSite in item.externalSites %}
-                                <a target="_blank" href="{{ displayUrl(externalSite.cloakedUrl) }}"><i class="fas fa-external-link-alt"></i> {{ externalSite.name }}</a>{% if not loop.last %}, {% endif %}
+                            <a target="_blank" href="{{ displayUrl(externalSite.cloakedUrl) }}"><i class="fas fa-external-link-alt"></i> {{ externalSite.name }}</a>{% if not loop.last %}, {% endif %}
                             {% endfor %}
                             <br>
                         {% endif %}
@@ -304,5 +307,7 @@
             {% endfor %}
         </div>
     {% endif %}
-    {% include '@theme/_titles.html.twig' with {titles: item.otherTitles } %}
+    {% if item.otherTitles is defined %}
+        {% include '@theme/_titles.html.twig' with {titles: item.otherTitles } %}
+    {% endif %}
 {% endblock %}
