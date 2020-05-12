@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
-  <file id="messages.en">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="cz">
+  <file id="messages.cz">
     <unit id="messages">
       <segment>
         <source>more</source>
-        <target>More</target>
+        <target>Více</target>
       </segment>
       <segment>
         <source>less</source>
-        <target>Less</target>
+        <target>Méně</target>
       </segment>
       <segment>
         <source>unknown</source>
-        <target>Unknown</target>
+        <target>Neznámo</target>
       </segment>
       <segment>
         <source>collapse</source>
-        <target>Collapse</target>
+        <target>Sbalit</target>
       </segment>
       <segment>
         <source>_votes</source>
-        <target>{1} vote|[2,Inf[ votes</target>
+        <target>{1} hlas|[2,4] hlasy|[5,Inf[ hlasů</target>
       </segment>
       <segment>
         <source>_minutes</source>
-        <target>{1} %count% minute|[2,Inf[ %count% minutes</target>
+        <target>{1} %count% minuta|[2,4] %count% minuty|[5,Inf[ %count% minut</target>
       </segment>
       <segment>
         <source>index.title</source>
-        <target>Welcome</target>
+        <target>Vítejte</target>
       </segment>
       <segment>
         <source>title.download</source>
-        <target>Download</target>
+        <target>Stáhnout</target>
       </segment>
       <segment>
         <source>title.stream</source>
-        <target>Stream</target>
+        <target>Sledovat</target>
       </segment>
       <segment>
         <source>title.places</source>
-        <target>{1} Place|[2,Inf[ Places</target>
+        <target>{1} Místo|[2,Inf[ Místa</target>
       </segment>
       <segment>
         <source>title.genres</source>
-        <target>{1} Genre|[2,Inf[ Genres</target>
+        <target>{1} Žánr|[2,Inf[ Žánry</target>
       </segment>
       <segment>
         <source>title.series</source>
-        <target>Series</target>
+        <target>Série</target>
       </segment>
       <segment>
         <source>title.production</source>
-        <target>Production</target>
+        <target>Produkce</target>
       </segment>
       <segment>
         <source>title.url</source>
@@ -60,55 +60,55 @@
       </segment>
       <segment>
         <source>title.language</source>
-        <target>Language</target>
+        <target>Jazyk</target>
       </segment>
       <segment>
         <source>title.released</source>
-        <target>Released</target>
+        <target>Uvedeno</target>
       </segment>
       <segment>
         <source>player.paragraph0</source>
-        <target>The account is required to stream %name%</target>
+        <target>Pro sledovaní %name% je potřebné vytvoriť účet</target>
       </segment>
       <segment>
         <source>player.paragraph1</source>
-        <target>Create the account now!</target>
+        <target>Vytvořte si účet teď!</target>
       </segment>
       <segment>
         <source>flipswitch.on</source>
-        <target>Lights on</target>
+        <target>Světlo zapnout</target>
       </segment>
       <segment>
         <source>flipswitch.off</source>
-        <target>Lights off</target>
+        <target>Světlo vypnout/target>
       </segment>
       <segment>
         <source>title.externalSites</source>
-        <target>{1} Website|[2,Inf[ Websites</target>
+        <target>{1} Webstránka|[2,Inf[ Webstránky</target>
       </segment>
       <segment>
         <source>title.countries</source>
-        <target>{1} Country|[2,Inf[ Countries</target>
+        <target>{1} Krajina|[2,Inf[ Krajiny</target>
       </segment>
       <segment>
         <source>title.contentRating</source>
-        <target>Institution rating</target>
+        <target>Agenturní hodnocení</target>
       </segment>
       <segment>
         <source>title.duration</source>
-        <target>Length</target>
+        <target>Trvaní</target>
       </segment>
       <segment>
         <source>title.season</source>
-        <target>Season</target>
+        <target>Sezona</target>
       </segment>
       <segment>
         <source>title.episode</source>
-        <target>Episode</target>
+        <target>Epizoda</target>
       </segment>
       <segment>
         <source>title.TVSeries</source>
-        <target>TV Series</target>
+        <target>TV seriál</target>
       </segment>
     </unit>
   </file>
